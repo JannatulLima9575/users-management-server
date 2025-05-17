@@ -4,6 +4,7 @@ const cors = require('cors');
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('users server is running');
@@ -21,6 +22,17 @@ app.get('/users', (req, res) => {
 })
 
 // for post data
+app.post('/users', (req, res) => {
+    console.log('user post method');
+    console.log(req.body);
+    newUser.id = users.length + 1;
+
+    // add data to the database
+    users.push(newUser);
+    
+    res.send(newUser);
+    
+})
 
 app.listen(port, () => {
     console.log(`Example app listing port ${port}`);
